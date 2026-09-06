@@ -1,0 +1,46 @@
+name: Sync the RelayKit skill
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch the served skill and verify its digest
+        run: |
+          set -euo pipefail
+          BASE="https://relaykit.ai"
+          curl -fsSL "$BASE/.well-known/agent-skills/index.json" -o /tmp/index.json
+          URL=$(jq -r '.skills[] | select(.name == "relaykit") | .url' /tmp/index.json)
+          DIGEST=$(jq -r '.skills[] | select(.name == "relaykit") | .digest' /tmp/index.json)
+          test -n "$URL" && test -n "$DIGEST"
+          case "$URL" in http*) FULL="$URL" ;; *) FULL="$BASE$URL" ;; esac
+          curl -fsSL "$FULL" -o /tmp/SKILL.md
+          ACTUAL="sha256:$(sha256sum /tmp/SKILL.md | cut -d' ' -f1)"
+          if [ "$ACTUAL" != "$DIGEST" ]; then
+            echo "digest mismatch: index says $DIGEST, served bytes are $ACTUAL" >&2
+            exit 1
+          fi
+          mkdir -p skills/relaykit
+          cp /tmp/SKILL.md skills/relaykit/SKILL.md
+
+      - name: Commit when the bytes changed
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- skills/relaykit/SKILL.md && [ -n "$(git ls-files skills/relaykit/SKILL.md)" ]; then
+            echo "already current"
+            exit 0
+          fi
+          git config user.name "relaykit-skill-sync"
+          git config user.email "skills@relaykit.ai"
+          git add skills/relaykit/SKILL.md
+          git commit -m "sync: SKILL.md from relaykit.ai ($(date -u +%Y-%m-%dT%H:%MZ))"
+          git push
