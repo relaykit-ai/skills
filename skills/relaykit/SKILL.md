@@ -43,7 +43,7 @@ Content-Type: application/json
   "to": "+15551234567",
   "data": {
     "workspace_name": "Acme Engineering",
-    "provider_name": "Dr. Sarah Chen",
+    "provider_name": "Sam Rivera",
     "appointment_time": "Tue, March 4th, 2:00 PM",
     "cancel_link": "yourapp.com/cancel"
   },
