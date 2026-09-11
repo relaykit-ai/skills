@@ -74,7 +74,7 @@ One of three things comes back:
 - **`queued` (202) happens only on marketing sends** — RelayKit is holding the text until the recipient's quiet hours end. Nothing else queues.
 - **Marketing needs `marketing_consent: true`** on every send in the `marketing` namespace and on `appointments.time-to-rebook`. Without it the request is a 422 `marketing_consent_required`, and that is the app's attestation, not a flag to set blindly.
 - **Retries carry an `Idempotency-Key` header** — any string, unique per logical send. The same key inside 24 hours replays the first result instead of sending twice. A blocked result is replayed too — once the cause is fixed (the tester verified, consent recorded), retry with a new key.
-- **A test key reaches verified testers only.** A send to anyone else is blocked with `recipient_not_verified`. A live key comes later, from the same workspace, once the business is registered — not from code.
+- **A test key reaches verified testers only.** A send to anyone else is blocked with `recipient_not_verified`. A live key comes later, from the same workspace, once registration is approved — not from code.
 - **A few older messages have one rendering.** Asking for a `tone` on one is a 422 `tone_not_available`; drop the field.
 
 ## When a send fails twice
