@@ -14,16 +14,16 @@ RelayKit sends text messages for applications: appointment reminders, login code
 <!-- gen:skill-vocabulary:start -->
 | Namespace | What it covers | Messages |
 |---|---|---|
-| `verification` | Verification | 4 |
-| `appointments` | Appointments | 15 |
+| `verification` | Verification | 5 |
+| `appointments` | Appointments | 22 |
 | `order-updates` | Order updates | 10 |
 | `digital-delivery` | Digital delivery | 3 |
-| `customer-support` | Customer support | 9 |
-| `team-alerts` | Team alerts | 15 |
-| `community` | Community | 9 |
+| `customer-support` | Customer support | 11 |
+| `team-alerts` | Team alerts | 20 |
+| `community` | Community | 10 |
 | `waitlist` | Waitlist | 6 |
-| `account-events` | Account events | 18 |
-| `documents` | Documents | 6 |
+| `account-events` | Account events | 27 |
+| `documents` | Documents | 8 |
 | `marketing` | Marketing | 4 |
 <!-- gen:skill-vocabulary:end -->
 
