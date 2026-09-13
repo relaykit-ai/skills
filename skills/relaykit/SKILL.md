@@ -15,7 +15,7 @@ RelayKit sends text messages for applications: appointment reminders, login code
 | Namespace | What it covers | Messages |
 |---|---|---|
 | `verification` | Verification | 5 |
-| `appointments` | Appointments | 23 |
+| `appointments` | Appointments | 26 |
 | `order-updates` | Order updates | 11 |
 | `digital-delivery` | Digital delivery | 3 |
 | `customer-support` | Customer support | 11 |
