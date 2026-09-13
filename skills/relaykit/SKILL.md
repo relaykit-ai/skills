@@ -42,7 +42,7 @@ Content-Type: application/json
   "event": "reminder-proximate",
   "to": "+15551234567",
   "data": {
-    "workspace_name": "Acme Engineering",
+    "your_brand": "Acme Engineering",
     "provider_name": "Sam Rivera",
     "appointment_time": "Tue, March 4th, 2:00 PM",
     "cancel_link": "yourapp.com/cancel"
@@ -60,7 +60,7 @@ One of three things comes back:
 ```
 <!-- gen:skill-send:end -->
 
-   `data` carries every variable the message names — the catalog's `variables` array for that message, nothing more and nothing less. Pass the ones the catalog tags `workspace settings` too; the API doesn't fill them, and a missing one is a 400 that names it. `tone` is optional: `standard`, `friendly` or `brief`, lowercase even where the catalog capitalises it; leave it out for `standard`.
+   `data` carries every variable the message names — the catalog's `variables` array for that message — with one exception: `your_brand`. RelayKit fills that one from the brand on the account, so leave it out; a value passed for it is ignored. Everything else the catalog lists is yours to pass, including the ones it tags `workspace settings`, and a missing one is a 400 that names it. `tone` is optional: `standard`, `friendly` or `brief`, lowercase even where the catalog capitalises it; leave it out for `standard`.
 
 4. **Preview before the first real send from any new call site.** `POST /v1/messages/preview` takes the same body and the same auth, sends nothing, and returns the rendered text as `message`. Show it to the person.
 
