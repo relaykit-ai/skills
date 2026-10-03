@@ -18,11 +18,11 @@ RelayKit sends text messages for applications: appointment reminders, login code
 | `appointments` | Appointments | 30 |
 | `order-updates` | Order updates | 13 |
 | `digital-delivery` | Digital delivery | 3 |
-| `customer-support` | Customer support | 13 |
+| `customer-support` | Customer support | 14 |
 | `team-alerts` | Team alerts | 24 |
 | `community` | Community | 10 |
 | `waitlist` | Waitlist | 6 |
-| `account-events` | Account events | 37 |
+| `account-events` | Account events | 38 |
 | `documents` | Documents | 8 |
 | `marketing` | Marketing | 4 |
 <!-- gen:skill-vocabulary:end -->
