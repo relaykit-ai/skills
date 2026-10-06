@@ -15,15 +15,15 @@ RelayKit sends text messages for applications: appointment reminders, login code
 | Namespace | What it covers | Messages |
 |---|---|---|
 | `verification` | Verification | 5 |
-| `appointments` | Appointments | 53 |
+| `appointments` | Appointments | 74 |
 | `order-updates` | Order updates | 13 |
 | `digital-delivery` | Digital delivery | 3 |
-| `customer-support` | Customer support | 14 |
-| `team-alerts` | Team alerts | 26 |
+| `customer-support` | Customer support | 16 |
+| `team-alerts` | Team alerts | 27 |
 | `community` | Community | 10 |
-| `waitlist` | Waitlist | 6 |
-| `account-events` | Account events | 44 |
-| `documents` | Documents | 10 |
+| `waitlist` | Waitlist | 7 |
+| `account-events` | Account events | 56 |
+| `documents` | Documents | 11 |
 | `marketing` | Marketing | 4 |
 <!-- gen:skill-vocabulary:end -->
 
@@ -66,6 +66,8 @@ One of three things comes back:
 
 5. **Verify with a phone, not a status code.** A test key (`rk_test_…`) only reaches numbers that have verified as testers: `POST /v1/sandbox/recipients` with `{ "phone": "+1…" }`, RelayKit texts that phone a code, and the person replies YES (or enters the code). Send to a verified tester, then ask the person whether their phone buzzed. That is the test. A 200 is not. `GET /v1/messages` also lists RelayKit's own texts to that phone — the verification code, under `namespace: system` — so count only your namespaces.
 
+6. **Take replies.** People can text back. RelayKit passes every reply except STOP, HELP and its other keywords to one route in the app: it POSTs `{"type":"reply.received","id":"rpl_…"}`. Answer 200, then read the reply with `GET /v1/replies/{id}`. Set the route's address with `PUT /v1/replies/endpoint` `{ "url": "https://…" }` and prove it with `POST /v1/replies/endpoint/test`. On localhost, read `GET /v1/replies?since=…` instead. Show every reply to the business; never text back automatically.
+
 ## Pitfalls
 
 - **Consent comes first.** The place the app collects a phone number says, next to the field, what texts the person will get. Don't add a send to a flow that never asked.
@@ -76,6 +78,7 @@ One of three things comes back:
 - **Retries carry an `Idempotency-Key` header** — any string, unique per logical send. The same key inside 24 hours replays the first result instead of sending twice. A blocked result is replayed too — once the cause is fixed (the tester verified, consent recorded), retry with a new key.
 - **A test key reaches verified testers only.** A send to anyone else is blocked with `recipient_not_verified`. A live key comes later, from the same workspace, once registration is approved — not from code.
 - **A few older messages have one rendering.** Asking for a `tone` on one is a 422 `tone_not_available`; drop the field.
+- **A reply can arrive twice** — save replies by `id`. And a reply never says which text it answers; match it by `from` to the most recent text the app sent that number.
 
 ## When a send fails twice
 
@@ -87,7 +90,7 @@ Message wording lives in RelayKit, not in the code. Never write a text message b
 
 ## Pointers
 
-- `https://relaykit.ai/docs/v1.md` — every request and response shape, plus message history, opt-outs and consent.
+- `https://relaykit.ai/docs/v1.md` — every request and response shape, plus message history, replies, opt-outs and consent.
 - `https://relaykit.ai/corpus.json` — the catalog.
 - `https://relaykit.ai/AGENTS.md` — this guide, readable.
 - If a RelayKit MCP server is connected, prefer its tools for the catalog and for test sends.
