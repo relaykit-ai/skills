@@ -15,10 +15,10 @@ RelayKit sends text messages for applications: appointment reminders, login code
 | Namespace | What it covers | Messages |
 |---|---|---|
 | `verification` | Verification | 5 |
-| `appointments` | Appointments | 74 |
+| `appointments` | Appointments | 80 |
 | `order-updates` | Order updates | 13 |
 | `digital-delivery` | Digital delivery | 3 |
-| `customer-support` | Customer support | 16 |
+| `customer-support` | Customer support | 17 |
 | `team-alerts` | Team alerts | 27 |
 | `community` | Community | 10 |
 | `waitlist` | Waitlist | 7 |
@@ -44,7 +44,7 @@ Content-Type: application/json
   "data": {
     "your_brand": "Acme Engineering",
     "provider_name": "Sam Rivera",
-    "appointment_time": "Tue, March 4th, 2:00 PM",
+    "appointment_time": "Tue, Oct 6, 9:40 PM",
     "cancel_link": "yourapp.com/cancel"
   },
   "tone": "friendly"
