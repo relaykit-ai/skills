@@ -19,9 +19,9 @@ RelayKit sends text messages for applications: appointment reminders, login code
 | `order-updates` | Order updates | 13 |
 | `digital-delivery` | Digital delivery | 3 |
 | `customer-support` | Customer support | 19 |
-| `team-alerts` | Team alerts | 29 |
+| `team-alerts` | Team alerts | 40 |
 | `community` | Community | 10 |
-| `waitlist` | Waitlist | 12 |
+| `waitlist` | Waitlist | 15 |
 | `account-events` | Account events | 58 |
 | `documents` | Documents | 11 |
 | `marketing` | Marketing | 4 |
