@@ -45,7 +45,10 @@ Content-Type: application/json
     "your_brand": "Acme Engineering",
     "appointment_time": "Tue, Oct 6, 9:40 PM",
     "business_phone": "843-555-0142",
-    "reschedule_link": "yourapp.com/reschedule"
+    "reschedule_link": "yourapp.com/reschedule",
+    "provider_name": "Sam Rivera",
+    "location": "118 Elm St",
+    "service_name": "yearly service"
   },
   "tone": "friendly"
 }
