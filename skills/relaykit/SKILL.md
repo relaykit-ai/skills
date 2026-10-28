@@ -28,8 +28,31 @@ Any sentence that names RelayKit uses this skill. Three phrases have one job eac
 
 The server is `https://api.relaykit.ai/mcp` (Streamable HTTP). Sign-in is OAuth, in her browser. There is never a key to paste.
 
-- **Claude Code.** Say nothing first. Run `claude mcp add --transport http relaykit https://api.relaykit.ai/mcp`. Claude Code sees a server only after a restart, so say only: "RelayKit is added. Restart me with `claude --continue` and say done." On her done, read her app first, silently. Then say, as the last thing in that turn: "Opening RelayKit. Type /mcp, pick relaykit, then Authenticate. Sign up while I configure it, then we'll go through <app>'s texts together. Allow it in the browser, then come back here and say done." Nothing follows it.
-- **Cursor. Not yet proven.** Add `relaykit` to `.cursor/mcp.json`: `{ "mcpServers": { "relaykit": { "url": "https://api.relaykit.ai/mcp" } } }`. She opens Cursor's MCP settings and taps Login next to relaykit. If no RelayKit page opens, tell her in one line and stop.
+Don't announce what you are about to do ("I'll fetch the skill…"): the first thing you say is the restart line in Claude Code, the sign-in line in Cursor.
+
+- **Claude Code.** Say nothing first. Run `claude mcp add --transport http relaykit https://api.relaykit.ai/mcp`. Claude Code sees a server only after a restart, so say only the restart line:
+
+  > RelayKit is added.
+  > 1. Type /exit.
+  > 2. Run `claude --continue`.
+  > 3. Type done.
+
+  On her done, read her app first, silently. Then say the sign-in line, as the last thing in that turn. Nothing follows it.
+
+  > Opening RelayKit.
+  > 1. Type /mcp, pick relaykit, then Authenticate.
+  > 2. Sign up in the browser and allow Claude Code.
+  > 3. Come back here and type done.
+
+- **Cursor.** Say nothing first. Add `relaykit` to `.cursor/mcp.json`: `{ "mcpServers": { "relaykit": { "url": "https://api.relaykit.ai/mcp" } } }`. Cursor needs no restart, but a server added to a project starts turned off. Read her app first, silently. Then say the sign-in line, as the last thing in that turn. Nothing follows it.
+
+  > Opening RelayKit.
+  > 1. Open Customize, then MCPs, and turn relaykit on.
+  > 2. Tap Authenticate.
+  > 3. Sign up in the browser and allow Cursor.
+  > 4. Come back here and type done.
+
+  If no RelayKit page opens, tell her in one line and stop.
 - **Any other tool. Not yet proven.** Add a remote MCP server named `relaykit` at that address, then start its sign-in the way your tool signs in to remote servers. If your tool can't, tell her in one line and stop.
 
 ## Every session starts here
@@ -45,7 +68,7 @@ RelayKit's server gives every tool that connects the same rule:
 
 Run setup once, right after she allows the connection, in this order. Nothing is built at setup.
 
-1. **Platform.** Work out whether her app texts for one business or for many. Infer it from her data and her product: how many businesses the data holds, whose name is on the jobs. This is your first line after the sign-in, so it starts with "Connected." Ask for a yes in one line, with your evidence: "Connected. One check first: Dispatchly serves several shops, not just one, right? I see three." Only when you can't tell, ask: "Connected. One check first: is <app> for one business, or will other businesses use it?"
+1. **Platform.** Work out whether her app texts for one business or for many. Infer it from her data and her product: how many businesses the data holds, whose name is on the jobs. This is your first line after the sign-in, so it starts with "Connected." When you can tell from her app, ask for a yes in one line, naming no business: "Connected. One check first: <app> serves multiple businesses, not just one, right?" When you can't tell, ask: "Connected. One check first: is <app> for one business, or does it serve multiple businesses?" Wherever her app has its own noun for its clients (shops, clinics, districts), use it in place of "businesses"; "businesses" is only the fallback.
 2. **Keep or clean.** If the workspace shows anything she set herself (a text's `set_by` or a line's `source` is `you`), ask in the same breath: "You've changed this workspace yourself; setup keeps your changes and sets up the rest around them. Go ahead?" On her yes, begin with `keep_mine: true`. On her no, stop and ask what she wants. When nothing in the workspace is hers, say nothing about keeping or cleaning: no line on it at all.
 3. **The one approval.** Say: "RelayKit will ask you to allow one tool call." Then send the whole setup as one `relaykit_apply` call, so her tool asks her once. Add where her workspace is: app.relaykit.ai/workspace.
 4. **The batch, in this order.** It carries one `version`, from your last read. Every write in it but `relaykit_setup` takes a `reason`.
