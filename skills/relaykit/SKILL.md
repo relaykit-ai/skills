@@ -119,7 +119,7 @@ RelayKit's words are written to a standard. Change a text's words, lines or samp
 - the text would cost 2x;
 - the words get a fact about her business wrong.
 
-Never for taste, for variety, or to improve the library. Write the reason into the write's `reason`, in her words. Tell her the change in one line, with its reason.
+Never for taste, for variety, or to improve the library. Write the reason into the write's `reason`: one sentence she'd understand on its own, what changed and why, under 80 characters. Like: "Shortened to fewer than 160 characters so it fits in one text." · "Your tech names run long, so first names keep it under 160." · "Dispatchly doesn't have the window yet, so that line is out." · "You asked: we say call, not visit." Tell her the change in one line, with its reason.
 
 ## Do, do and say, ask first
 
