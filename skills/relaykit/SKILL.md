@@ -215,7 +215,7 @@ How a text gets into her app's code, once she asks for it.
 | `appointments` | Appointments | 98 |
 | `order-updates` | Order updates | 13 |
 | `digital-delivery` | Digital delivery | 3 |
-| `customer-support` | Customer support | 19 |
+| `customer-support` | Customer support | 20 |
 | `team-alerts` | Team alerts | 40 |
 | `community` | Community | 10 |
 | `waitlist` | Waitlist | 15 |
