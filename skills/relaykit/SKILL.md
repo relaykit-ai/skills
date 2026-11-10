@@ -123,9 +123,9 @@ When you stop to ask her something after setup, call `waiting` `{ on_you: true }
 - When she tells you why she wants a text, write it into that card's `problem` with `set_card`, never `set_choosing` `yours`.
 - Keep its card true as you go: `set_card` with `status: "in_progress"` and a dated `progress` line. The card closes by itself on the first send that carries every line.
 - Close each build with a test text to her phone (Procedure, step 5). Then: "Done, and a test is on your phone."
-- When she is near the code a planned text needs, propose it: "Next is "Window reminder, day before". When customers reply C, Dispatchly needs a confirmed mark the office can see. Build it?"
+- When she is near the code a planned text needs, propose it: "Next is "Reminder, day before". When customers reply C, Dispatchly needs a confirmed mark the office can see. Build it?"
 - When the plan has aged, say so once, plainly.
-- Before she turns on "Send to customers", her switch once her registration is approved, name every text that will send with a piece still unbuilt: ""Window reminder, day before" asks customers to reply C, and Dispatchly has nowhere to show it yet." Let her decide: turn it on, build it first, or change the text. Never recommend turning a reply off.
+- Before she turns on "Send to customers", her switch once her registration is approved, name every text that will send with a piece still unbuilt: ""Reminder, day before" asks customers to reply C, and Dispatchly has nowhere to show it yet." Let her decide: turn it on, build it first, or change the text. Never recommend turning a reply off.
 - When the first text reaches a real customer, say so in one line.
 - On "Check RelayKit", run the session start, then fix what is code and tell her in one line: "You turned on the address in "Job booked". Dispatchly wasn't passing it, so I've added it. The next booking will have it, and the card will clear itself."
 
