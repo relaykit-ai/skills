@@ -78,9 +78,9 @@ Before your first line, read her app: her code, her docs, and her website alongs
    1. `setup` `{ state: "begin" }`, with `keep_mine: true` when she said yes in step 2.
    2. `set_business`: the name, the trade's `slug` from the summary's `trades`, and the platform answer.
    3. `set_workflows`: every workflow of her trade on; a standard workflow on only when you see she needs it.
-   4. `set_text` for each text you turn on or off, in page order.
+   4. `set_text` for each text you turn on or off, in page order. For a workflow you will send `[]` for, turn its Basics off here: a new workspace starts with them on.
    5. `set_samples` for each workflow that is on, in page order, only for the values you read in her app.
-   6. `set_choosing` `{ state: "open" }` with your picks for every workflow that is on, each with its why: every pick carries one. When you pick a text that asks a question, name its answers too, each under the question's why. For a trade workflow her app doesn't do, turn on its Basics and nothing else, and send no picks (`[]`) with a one-line reason: what her app doesn't do yet ("maintenance plans"), never that it shouldn't.
+   6. `set_choosing` `{ state: "open" }` with your picks for every workflow that is on, each with its why: every pick carries one. When you pick a text that asks a question, name its answers too, each under the question's why. For a trade workflow her app doesn't do, turn nothing on in it, and send no picks (`[]`) with a one-line reason: what her app doesn't do yet ("maintenance plans"), never that it shouldn't.
    7. `setup` `{ state: "done" }`.
 
    No plan cards at setup. They come when she has chosen.
@@ -88,12 +88,12 @@ Before your first line, read her app: her code, her docs, and her website alongs
    - Your picks are the texts her business would want. Leave what she set herself as it is.
    - The why is one line, under 80 characters, in her app's words: start it "In your code:" when her code shows it, "In your docs:" when her docs or plan do, "On your site:" when her website does. Say it in your own words; never quote more than a few words. A text you have no evidence for is not a pick.
    - A pick may carry a `detail`, under 240 characters: what its card opens to, what you saw that makes it a pick, in a few plain sentences.
-   - When you can't tell enough about her app to pick, leave every workflow in her trade on, turn on each one's Basics, send `picks: null`, and give no reasons.
-   - A workflow her app doesn't do starts at its Basics like any other; your `[]` and its reason put a note on it, so she can turn on what her app doesn't do yet.
+   - When you can't tell enough about her app to pick, leave every workflow in her trade on, turn on each one's Basics, send `picks: null`, and give no reasons. Where a workflow has no Basics, nothing in it is on.
+   - A workflow her app doesn't do opens on your picks with nothing on, and your reason puts a note on it. It leaves her page when she presses "Done choosing", unless she turns a text on.
    - A sample is made up and shaped like the longest real value of a field you read in her app. Never a real customer's value, and never a field you made up: a value her app doesn't have keeps RelayKit's placeholder.
    - Words stay as RelayKit wrote them unless a reason below holds.
 6. **Read the answer.** `changes` lists what landed. If `refused` is there, the writes before it stand and the rest did not run. Handle the refusal as "Ask first" says, then send the rest. If the call comes back `invalid_data` with `invalid`, nothing landed: fix every entry it names and send the whole batch again.
-7. **Then one line, and quiet.** Say: "RelayKit is set up for <app>, with my picks on in each workflow. Change anything you like on the page, then press "Done choosing" and tell me "Check RelayKit"." If you sent `picks: null`, say "with the basics on in each workflow" in place of "with my picks on in each workflow". Then nothing until she talks to you. The page teaches the same phrase when she presses Done.
+7. **Then one line, and quiet.** Say: "RelayKit is set up for <app>, with my picks on in each workflow. Change anything you like on the page, then press "Done choosing" and tell me "Check RelayKit"." If you sent `picks: null`, say "with the basics on in each workflow" in place of "with my picks on in each workflow". If you sent `[]` for any workflow, say "with my picks on where <app> needs them" in place of "with my picks on in each workflow". Then nothing until she talks to you. The page teaches the same phrase when she presses Done.
    - While she chooses, the page is hers. If she asks you to change a text, do it and say so in one line. Never turn off or change a text she turned on or off herself; if you think it should change, ask in one line.
    - When she tells you why she turned a text on, take it well: assume a good reason, ask one open question if it helps, reflect it back, add what helps, never argue her out of it. Then write it: `set_choosing` with `yours: [{ card, reason }]` for that workflow (her words, your short paraphrase, 80 characters; no `state`), so her card reads "Your reason: …". Once the plan is settled, her reason goes on that text's card instead: `set_card` with its `problem` rewritten in her words. Never `yours` after `settled`; RelayKit refuses it.
    - Don't raise what a text needs from <app> or what it costs. That comes with the plan.
