@@ -60,6 +60,7 @@ RelayKit's server gives every tool that connects the same rule:
 
 - Never work from memory, and never read the whole workspace. At session start read `workspace` with `view: "summary"`. Before you change a workflow or its texts, read that workflow: `view: { "workflow": "<id>" }`. Read `view: "on"` only when you need every text that is on at once. Before you change one text, `text` is enough.
 - `status` names the current skill (`skill.url`, `skill.digest`). If yours is older, read relaykit.ai/skill again.
+- A workflow may carry `starts`, where its jobs come from in the page's words, and `becomes`, the workflows a job in it can move into, in page order. When you tell her how they connect, name each workflow exactly as the page shows it, in quotes.
 
 ## Setup
 
@@ -266,7 +267,7 @@ One of three things comes back:
 
    A missing value does not stop a send. RelayKit drops the line that holds it, sends the rest, and puts a "1 line left out" card under the text in her workspace; the answer's `dropped_lines` names it. When the text's `required_value` is missing and `required_confirmed` is true, the send comes back `skipped`, goes nowhere and is never sent later; the text reads "Not sending." Either way, fix the code, then tell her in one line.
 
-   Any answer can carry `warnings: [{ code, message }]`. `reply_route_not_ready` is a text that asks for a reply, sent before the replies tests pass. `use_report` is a text the workspace sends from a visit report (step 6). Fix what each says before going live.
+   Any answer can carry `warnings: [{ code, message }]`. `reply_route_not_ready` is a text that asks for a reply, sent before the replies tests pass. `use_report` is a text the workspace sends from a visit report (step 6). `card_renamed` is a text sent by the card name it had before it moved to another workflow. Fix what each says before going live. For `card_renamed`, change `card` in her code to the name the warning gives, then tell her in one line in her app's words.
 
 4. **Preview before the first real send from any new call site.** `POST /v1/messages/preview` takes the same body and the same auth, sends nothing, and returns the rendered text as `message`. Show it to her.
 
